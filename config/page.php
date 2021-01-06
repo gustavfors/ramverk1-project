@@ -10,7 +10,7 @@ return [
     // all the other views are rendered.
     "layout" => [
         "region" => "layout",
-        "template" => "anax/v2/layout/dbwebb_se",
+        "template" => "layout/plain",
         "data" => [
             "baseTitle" => " | ramverk1",
             "bodyClass" => null,
@@ -18,10 +18,10 @@ return [
             "htmlClass" => null,
             "lang" => "sv",
             "stylesheets" => [
-                "css/dbwebb-se.min.css",
+                "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css",
             ],
             "javascripts" => [
-                "js/responsive-menu.js",
+                // "js/responsive-menu.js",
             ],
         ],
     ],
