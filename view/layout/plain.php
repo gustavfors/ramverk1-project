@@ -52,8 +52,16 @@ $title = ($title ?? "No title");
 </nav>
 
 <?php if (regionHasContent("main")) : ?>
-<main class="region-main" role="main">
-    <?php renderRegion("main") ?>
+<main class="container" role="main">
+    <div class="row">
+        <div class="col-8">
+            <?php require component("errors"); ?>
+            <?php renderRegion("main") ?>
+        </div>
+        <div class="col-4">
+            <!-- sidebar content -->
+        </div>
+    </div>
 </main>
 <?php endif; ?>
 
