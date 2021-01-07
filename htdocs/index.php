@@ -18,6 +18,21 @@ $di->loadServices(ANAX_INSTALL_PATH . "/config/di");
 
 \Gufo\Post\Post::setDatabase($di->get("db"));
 
+function component($name) {
+    return ANAX_INSTALL_PATH . "/view/component/{$name}.php";
+}
+
+function dd($dump)
+{
+    die(var_dump($dump));
+}
+
+function linkTo($route)
+{
+    global $di;
+    return $di->get("request")->getBaseUrl() . "/{$route}";
+}
+
 // // Add anax/proxy access to $id, if available
 // if (class_exists("\Anax\Proxy\ProxyDIFactory")) {
 //     \Anax\Proxy\ProxyDIFactory::init($di);

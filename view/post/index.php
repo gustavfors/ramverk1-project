@@ -1,1 +1,5 @@
-<h1>Hello</h1>
+<?php
+
+foreach ($posts as $post) {
+    require component("post");
+}

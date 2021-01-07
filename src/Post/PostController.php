@@ -4,21 +4,24 @@ namespace Gufo\Post;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
+use Gufo\Commons\RenderPageTrait;
 use Gufo\Post\Post;
 
 class PostController implements ContainerInjectableInterface
 {
-    use ContainerInjectableTrait;
+    use ContainerInjectableTrait, RenderPageTrait;
 
     public function indexActionGet()
     {
+        return $this->renderPage("post/index", "index", [
+            "posts" => Post::findAll()
+        ]);
+    }
 
-        $posts = Post::find_by_id(1);
-
-        die(var_dump($posts));
-
-        $this->di->get("page")->add("post/index");
-
-        return $this->di->get("page")->render(["title" => "index"]);
+    public function showActionGet($id)
+    {
+        return $this->renderPage("post/show", "show", [
+            "post" => Post::findById($id)
+        ]);
     }
 }

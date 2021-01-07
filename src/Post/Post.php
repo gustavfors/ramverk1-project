@@ -23,8 +23,7 @@ class Post
 
         $objectArray = [];
 
-        while($record = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-
+        while ($record = $stmt->fetch(\PDO::FETCH_ASSOC)) {
             $objectArray[] = self::instantiate($record);
         }
 
@@ -43,7 +42,7 @@ class Post
         }
     }
 
-    public static function find_by_id($id)
+    public static function findById($id)
     {
         $sql = "SELECT * FROM posts WHERE id = ?";
         $objectArray = self::findBySql($sql, [$id]);
@@ -59,7 +58,7 @@ class Post
     {
         $object = new self;
 
-        foreach($record as $property => $value) {
+        foreach ($record as $property => $value) {
             if (property_exists($object, $property)) {
                 $object->$property = $value;
             }
