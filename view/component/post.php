@@ -9,7 +9,7 @@
                 <div class="thread-line"></div>
             </aside>
             <main style="flex: 1;" class="ms-3">
-                <div class="post-info"><a href="#">Cersei Lannister</a> <?= $post->score(); ?> points · 1 day ago</div>
+                <div class="post-info"><a href="<?= linkTo("user/show/{$post->author()->id}"); ?>"><?= $post->author()->fullName(); ?></a> <?= $post->score(); ?> points · <?= $post->created; ?></div>
                 <?php if (preg_match("/show\/[0-9]+/", $di->get("request")->getRoute())) : ?>
                     <h1><?= htmlspecialchars($post->title); ?></h1>
                 <?php else : ?>

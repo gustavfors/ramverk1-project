@@ -20,7 +20,6 @@ class Vote extends DatabaseObject
         $this->score = $values['score'] ?? 1;
         $this->post = $values['post'] ?? '';
         $this->user = $values['user'] ?? '';
-        
     }
 
     public static function findUserVote($post, $user)

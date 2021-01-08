@@ -73,8 +73,8 @@ class PostController implements ContainerInjectableInterface
             return "Unauthorized.";
         }
 
-        $tags = array_map(function($tag) {
-            return $tag['name']; 
+        $tags = array_map(function ($tag) {
+            return $tag['name'];
         }, $post->tags());
 
         $tags = join(" ", $tags);

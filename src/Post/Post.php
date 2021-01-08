@@ -5,6 +5,7 @@ namespace Gufo\Post;
 use Gufo\Commons\ValidationTrait;
 use Gufo\DatabaseObject\DatabaseObject;
 use Gufo\Reply\Reply;
+use Gufo\User\User;
 
 class Post extends DatabaseObject
 {
@@ -28,14 +29,28 @@ class Post extends DatabaseObject
 
     public static function findAll()
     {
-        $sql = "SELECT * FROM posts WHERE parent IS NULL";
+        $sql = "SELECT * FROM posts WHERE parent IS NULL ORDER BY created DESC";
         return self::findCustom($sql);
     }
 
-    public function replies()
+    public function replies($sort = '')
     {
-        $sql = "SELECT * FROM posts WHERE parent IS NOT NULL AND parent = ?";
-        return Reply::findCustom($sql, [$this->id]);
+
+        if ($sort == 'controversial') {
+            $sortBy = "score ASC";
+        } elseif ($sort == 'new') {
+            $sortBy = "created DESC";
+        } elseif ($sort == 'old') {
+            $sortBy = "created ASC";
+        } else {
+            $sortBy = 'score DESC';
+        }
+
+        $sql = "SELECT *, (SELECT SUM(score) FROM votes WHERE votes.post = posts.id) AS `score` FROM posts WHERE parent = ? ORDER BY {$sortBy}";
+        
+        $values = [$this->id];
+
+        return $this::findCustom($sql, $values);
     }
 
     protected function validate()

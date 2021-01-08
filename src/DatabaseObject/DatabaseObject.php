@@ -2,6 +2,8 @@
 
 namespace Gufo\DatabaseObject;
 
+use Gufo\User\User;
+
 class DatabaseObject
 {
     protected static $database;
@@ -60,6 +62,12 @@ class DatabaseObject
         }
 
         return $count;
+    }
+
+    public function author()
+    {
+        $sql = "SELECT * FROM users WHERE id = ?";
+        return User::findCustom($sql, [$this->user])[0];
     }
 
     public function tags()

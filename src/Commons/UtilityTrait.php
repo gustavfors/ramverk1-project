@@ -28,4 +28,9 @@ trait UtilityTrait
     {
         return $this->di->get("request")->getPost($key);
     }
+
+    public function getGet($key)
+    {
+        return $this->di->get("request")->getGet($key);
+    }
 }

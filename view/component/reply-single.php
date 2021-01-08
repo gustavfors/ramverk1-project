@@ -25,9 +25,5 @@
             <textarea name="body" rows="10" placeholder="What are your thoughts?"></textarea>
             <button type="submit">Submit</button>
         </form>
-
-        <?php foreach ($reply->replies() as $reply) : ?>
-            <?php require component("reply"); ?>
-        <?php endforeach; ?>
     </main>
 </section>

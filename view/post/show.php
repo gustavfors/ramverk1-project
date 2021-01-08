@@ -3,6 +3,8 @@
 require component("post");
 
 $sort = $_GET['sort'] ?? 'popular';
+
+
 ?>
 
 <div class="card">
@@ -23,7 +25,7 @@ $sort = $_GET['sort'] ?? 'popular';
     </div>
     <div class="card-body">
         <?php if ($post->replies()) : ?>
-            <?php foreach ($post->replies() as $reply) : ?>
+            <?php foreach ($post->replies($sort) as $reply) : ?>
                 <?php require component("reply"); ?>
             <?php endforeach; ?>
         <?php else : ?>

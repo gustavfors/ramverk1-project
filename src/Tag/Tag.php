@@ -38,6 +38,20 @@ class Tag extends DatabaseObject
         return $tags[0];
     }
 
+    public static function popular()
+    {
+        $sql = "SELECT tags.id, tags.name, (SELECT COUNT(*) FROM post_tag WHERE tag = tags.id) AS `posts` ";
+        $sql .= "FROM tags ";
+        $sql .= "GROUP BY tags.name";
+
+        $stmt = static::$database->prepare($sql);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
     public function posts()
     {
         $sql = "SELECT posts.id, posts.title, posts.body, posts.user, posts.created FROM post_tag ";

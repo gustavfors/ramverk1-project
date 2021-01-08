@@ -42,16 +42,40 @@ CREATE TABLE post_tag (
     "post" INTEGER
 );
 
--- /* posts */
-INSERT INTO posts ("title", "body", "user", "created") VALUES ("First post", "This is my first post", 1, "2020-01-03 10:13:48");
-INSERT INTO posts ("title", "body", "user", "parent", "created") VALUES ("Second post", "This is my second post", 1, 1, "2020-02-03 10:13:48");
-INSERT INTO posts ("title", "body", "user", "parent", "created") VALUES ("Third post", "This is my third post", 1, 1, "2020-03-03 10:13:48");
+--
+-- Table Users
+--
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "firstname" TEXT,
+    "lastname" TEXT,
+    "email" TEXT,
+    "password" TEXT
+);
 
-INSERT INTO posts ("body", "user", "parent", "created") VALUES ("level one reply", 1, 3, "2020-03-03 10:13:48");
-INSERT INTO posts ("body", "user", "parent", "created") VALUES ("level two reply", 1, 4, "2020-03-03 10:13:48");
-INSERT INTO posts ("body", "user", "parent", "created") VALUES ("level three reply", 1, 5, "2020-03-03 10:13:48");
-INSERT INTO posts ("body", "user", "parent", "created") VALUES ("level four reply", 1, 6, "2020-03-03 10:13:48");
-INSERT INTO posts ("body", "user", "parent", "created") VALUES ("level one reply", 1, 3, "2020-03-03 10:13:48");
+INSERT INTO "users" ("firstname", "lastname", "email", "password") VALUES ("Jon", "Snow", "riforon770@nonicamy.com", "pass123");
+INSERT INTO "users" ("firstname", "lastname", "email", "password") VALUES ("Daenerys", "Targaryen", "magegi4179@cocyo.com", "pass123");
+INSERT INTO "users" ("firstname", "lastname", "email", "password") VALUES ("Tyrion", "Lannister", "sevaf88517@nonicamy.com", "pass123");
+INSERT INTO "users" ("firstname", "lastname", "email", "password") VALUES ("Cersei", "Lannister", "bajijec468@nonicamy.com", "pass123");
+
+
+
+
+-- /* posts */
+INSERT INTO posts ("title", "body", "user", "created") VALUES ("We look up at the same stars and see such different things.", "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.", 1, "2020-01-03 10:13:48");
+
+
+
+
+-- INSERT INTO posts ("title", "body", "user", "parent", "created") VALUES ("Second post", "This is my second post", 1, 1, "2020-01-01 10:13:48");
+-- INSERT INTO posts ("title", "body", "user", "parent", "created") VALUES ("Third post", "This is my third post", 1, 1, "2020-02-03 10:13:48");
+-- INSERT INTO posts ("title", "body", "user", "parent", "created") VALUES ("Fourth post", "This is my Fouth Post", 1, 1, "2020-03-03 10:13:48");
+
+
+-- INSERT INTO votes ("score", "post", "user") VALUES (10, 2, 1);
+-- INSERT INTO votes ("score", "post", "user") VALUES (24, 3, 1);
+-- INSERT INTO votes ("score", "post", "user") VALUES (95, 4, 1);
 
 -- INSERT INTO votes ("score", "post", "user") VALUES (1, 1, 1);
 -- INSERT INTO votes ("score", "post", "user") VALUES (1, 1, 1);

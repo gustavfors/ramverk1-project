@@ -26,7 +26,7 @@ class TagController implements ContainerInjectableInterface
         $tag = Tag::findById($id);
 
         if (!$tag) {
-            return $this->redirectBack();  
+            return $this->redirectBack();
         }
 
         $posts = $tag->posts();

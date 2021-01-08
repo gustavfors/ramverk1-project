@@ -4,11 +4,12 @@ namespace Gufo\User;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
+use Gufo\Commons\UtilityTrait;
 use Gufo\User\User;
 
 class UserController implements ContainerInjectableInterface
 {
-    use ContainerInjectableTrait;
+    use ContainerInjectableTrait, UtilityTrait;
 
     public function indexActionGet()
     {
@@ -25,10 +26,13 @@ class UserController implements ContainerInjectableInterface
             return $this->redirectBack();
         }
 
+        $replies = $user->replies();
+    
         $posts = $user->posts();
 
-        return $this->renderPage("post/index", "index", [
-            "posts" => $posts
+        return $this->renderPage("user/show", "show", [
+            "posts" => $posts,
+            "replies" => $replies
         ]);
     }
 

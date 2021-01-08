@@ -58,7 +58,11 @@ $title = ($title ?? "No title");
             <?php renderRegion("main") ?>
         </div>
         <div class="col-4">
-            <!-- sidebar content -->
+            <?php if (preg_match("/user\/show\/[0-9]+/", $di->get("request")->getRoute())) : ?>
+            <?php require component("profile"); ?>
+            <?php endif; ?>
+            <?php require component("highscore"); ?>
+            <?php require component("tags"); ?>
         </div>
     </div>
 </main>
