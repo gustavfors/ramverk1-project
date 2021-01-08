@@ -44,6 +44,15 @@ class DatabaseObject
         }
     }
 
+    public function score()
+    {
+        $sql = "SELECT SUM(score) AS `score` FROM votes WHERE post = ?";
+        $stmt = self::$database->prepare($sql);
+        $stmt->execute([$this->id]);
+
+        return (int) $stmt->fetch(\PDO::FETCH_ASSOC)['score'] + 0;
+    }
+
     public static function findCustom($sql, $values = [])
     {
         $objectArray = static::findBySql($sql, $values);

@@ -6,6 +6,7 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Gufo\Commons\UtilityTrait;
 use Gufo\Post\Post;
+use Gufo\Vote\Vote;
 use Gufo\Reply\Reply;
 use Gufo\Auth\AuthTrait;
 
@@ -42,10 +43,20 @@ class PostController implements ContainerInjectableInterface
             return "Unauthorized";
         }
 
+        $user = $this->getUser();
+
         $post = new Post($this->getPost("post"));
-        $post->user = $this->getUser();
+        $post->user = $user;
 
         $post->save();
+
+        $vote = new Vote([
+            "score" => 1,
+            "post" => $post->id,
+            "user" => $user
+        ]);
+
+        $vote->save();
 
         return $this->redirect("post/show/{$post->id}");
     }
