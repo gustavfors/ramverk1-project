@@ -16,7 +16,7 @@ require ANAX_INSTALL_PATH . "/vendor/autoload.php";
 $di = new Anax\DI\DIFactoryConfig();
 $di->loadServices(ANAX_INSTALL_PATH . "/config/di");
 
-\Gufo\Post\Post::setDatabase($di->get("db"));
+\Gufo\DatabaseObject\DatabaseObject::setDatabase($di->get("db"));
 
 function component($name) {
     return ANAX_INSTALL_PATH . "/view/component/{$name}.php";

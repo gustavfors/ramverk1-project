@@ -15,4 +15,14 @@ class UserController implements ContainerInjectableInterface
 
         return $this->di->get("page")->render(["title" => "index"]);
     }
+
+    public function loginActionGet()
+    {
+        $this->di->get("session")->set("user", 1);
+    }
+
+    public function logoutActionGet()
+    {
+        $this->di->get("session")->delete("user");
+    }
 }

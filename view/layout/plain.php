@@ -35,7 +35,7 @@ $title = ($title ?? "No title");
 </head>
 
 <body>
-
+<?php var_dump($this->di->get("session")->get("user")); ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -52,10 +52,9 @@ $title = ($title ?? "No title");
 </nav>
 
 <?php if (regionHasContent("main")) : ?>
-<main class="container" role="main">
+<main class="container py-5" role="main">
     <div class="row">
         <div class="col-8">
-            <?php require component("errors"); ?>
             <?php renderRegion("main") ?>
         </div>
         <div class="col-4">

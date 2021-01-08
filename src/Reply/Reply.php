@@ -1,50 +1,38 @@
 <?php
 
-namespace Gufo\Post;
+namespace Gufo\Reply;
 
 use Gufo\Commons\ValidationTrait;
 use Gufo\DatabaseObject\DatabaseObject;
-use Gufo\Reply\Reply;
 
-class Post extends DatabaseObject
+class Reply extends DatabaseObject
 {
     use ValidationTrait;
 
     protected static $tableName = "posts";
-
-    protected static $dbColumns = ["id", "title", "body", "user", "created"];
+    protected static $dbColumns = ["id", "body", "user", "parent", "created"];
 
     public $id;
-    public $title;
     public $body;
     public $user;
     public $created;
 
     public function __construct($values = [])
     {
-        $this->title = $values['title'] ?? '';
         $this->body = $values['body'] ?? '';
-    }
-
-    public static function findAll()
-    {
-        $sql = "SELECT * FROM posts WHERE parent IS NULL";
-        return self::findCustom($sql);
+        $this->user = $values['user'] ?? '';
+        $this->parent = $values['parent'] ?? '';
     }
 
     public function replies()
     {
         $sql = "SELECT * FROM posts WHERE parent IS NOT NULL AND parent = ?";
-        return Reply::findCustom($sql, [$this->id]);
+        return self::findCustom($sql, [$this->id]);
     }
 
     protected function validate()
     {
         $this->errors = [];
-
-        if ($this->isBlank($this->title)) {
-            $this->errors[] = "Title cannot be blank.";
-        }
 
         if ($this->isBlank($this->body)) {
             $this->errors[] = "Body cannot be blank.";

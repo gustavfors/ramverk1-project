@@ -6,10 +6,12 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Gufo\Commons\UtilityTrait;
 use Gufo\Post\Post;
+use Gufo\Reply\Reply;
+use Gufo\Auth\AuthTrait;
 
 class PostController implements ContainerInjectableInterface
 {
-    use ContainerInjectableTrait, UtilityTrait;
+    use ContainerInjectableTrait, UtilityTrait, AuthTrait;
 
     public function indexActionGet()
     {
@@ -20,22 +22,6 @@ class PostController implements ContainerInjectableInterface
 
     public function showActionGet($id)
     {
-        $post = new Post([
-            'title' => 'Hello World!',
-            'body' => 'This is just a test'
-        ]);
-
-        $post->save();
-
-        $post->mergeAttributes([
-            'title' => 'new title',
-            'body' => 'new body'
-        ]);
-
-        $post->save();
-
-        
-
         return $this->renderPage("post/show", "show", [
             "post" => Post::findById($id)
         ]);
@@ -43,18 +29,52 @@ class PostController implements ContainerInjectableInterface
 
     public function createActionGet()
     {
+        if (!$this->loggedIn()) {
+            return "Unauthorized";
+        }
+
         return $this->renderPage("post/create", "create");
     }
 
     public function createActionPost()
     {
+        if (!$this->loggedIn()) {
+            return "Unauthorized";
+        }
+
         $post = new Post($this->getPost("post"));
+        $post->user = $this->getUser();
 
         $post->save();
 
-        if ($this->hasErrors($post)) {
-            return $this->redirectBack();
+        return $this->redirect("post/show/{$post->id}");
+    }
+
+    public function updateActionGet($id)
+    {
+        $post = Post::findById($id);
+
+        if (!$this->owner($post->user)) {
+            return "Unauthorized.";
         }
-        return $this->redirect("");
+
+        return $this->renderPage("post/update", "update", [
+            "post" => $post
+        ]);
+    }
+
+    public function updateActionPost($id)
+    {
+        $post = Post::findById($id);
+
+        if (!$this->owner($post->user)) {
+            return "Unauthorized.";
+        }
+
+        $post->mergeAttributes($this->getPost("post"));
+
+        $post->save();
+
+        return $this->redirect("post/show/{$post->id}");
     }
 }

@@ -28,18 +28,4 @@ trait UtilityTrait
     {
         return $this->di->get("request")->getPost($key);
     }
-
-    public function setErrors($errors)
-    {
-        $this->di->get("session")->set("errors", $errors);
-    }
-
-    public function hasErrors($obj)
-    {
-        if ($obj->errors) {
-            $this->setErrors($obj->errors);
-            return true;
-        }
-        return false;
-    }
 }
