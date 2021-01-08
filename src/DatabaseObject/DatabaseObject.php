@@ -53,6 +53,28 @@ class DatabaseObject
         return (int) $stmt->fetch(\PDO::FETCH_ASSOC)['score'] + 0;
     }
 
+    public function repliesCount($count = 0)
+    {
+        foreach ($this->replies() as $reply) {
+            $count = $reply->repliesCount($count + 1);
+        }
+
+        return $count;
+    }
+
+    public function tags()
+    {
+        $sql =  "SELECT tags.id, tags.name FROM post_tag ";
+        $sql .= "INNER JOIN tags ON post_tag.tag = tags.id ";
+        $sql .= "INNER JOIN posts ON post_tag.post = posts.id ";
+        $sql .= "WHERE posts.id = ?";
+
+        $stmt = self::$database->prepare($sql);
+        $stmt->execute([$this->id]);
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public static function findCustom($sql, $values = [])
     {
         $objectArray = static::findBySql($sql, $values);

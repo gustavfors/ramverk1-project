@@ -7,6 +7,8 @@ use Anax\Commons\ContainerInjectableTrait;
 use Gufo\Commons\UtilityTrait;
 use Gufo\Post\Post;
 use Gufo\Vote\Vote;
+use Gufo\Tag\Tag;
+use Gufo\PostTag\PostTag;
 use Gufo\Reply\Reply;
 use Gufo\Auth\AuthTrait;
 
@@ -58,6 +60,8 @@ class PostController implements ContainerInjectableInterface
 
         $vote->save();
 
+        PostTag::tag($this->getPost("tags"), $post->id);
+
         return $this->redirect("post/show/{$post->id}");
     }
 
@@ -69,8 +73,15 @@ class PostController implements ContainerInjectableInterface
             return "Unauthorized.";
         }
 
+        $tags = array_map(function($tag) {
+            return $tag['name']; 
+        }, $post->tags());
+
+        $tags = join(" ", $tags);
+
         return $this->renderPage("post/update", "update", [
-            "post" => $post
+            "post" => $post,
+            "tags" => $tags
         ]);
     }
 
@@ -85,6 +96,8 @@ class PostController implements ContainerInjectableInterface
         $post->mergeAttributes($this->getPost("post"));
 
         $post->save();
+
+        PostTag::tag($this->getPost("tags"), $post->id);
 
         return $this->redirect("post/show/{$post->id}");
     }

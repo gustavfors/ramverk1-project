@@ -29,7 +29,16 @@ CREATE TABLE votes (
 DROP TABLE IF EXISTS tags;
 CREATE TABLE tags (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "name" Text UNIQUE,
+    "name" Text UNIQUE
+);
+
+--
+-- Table Post_Tag
+--
+DROP TABLE IF EXISTS post_tag;
+CREATE TABLE post_tag (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "tag" INTEGER,
     "post" INTEGER
 );
 

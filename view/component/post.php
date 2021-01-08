@@ -17,7 +17,7 @@
                 <?php endif; ?>
                 <div class="post-content my-2"><?= $post->body; ?></div>
                 <div class="post-panel d-flex align-items-center">
-                    <div><a href="<?= linkTo("post/show/{$post->id}"); ?>"><i class="fas fa-comments me-2"></i>50 Replies</a></div>
+                    <div><a href="<?= linkTo("post/show/{$post->id}"); ?>"><i class="fas fa-comments me-2"></i><?= $post->repliesCount(); ?> Replies</a></div>
                     
 
                      <form action="<?= linkTo("vote/up/{$post->id}"); ?>" method="POST">
@@ -28,7 +28,12 @@
                         <button type="submit" class="d-flex align-items-center"><i class="fas fa-arrow-down"></i></button>
                     </form>
 
-                    <div class="ms-2"><i class="fas fa-tags me-2"></i>Tags: #dogs #cats</div>
+                    <div class="ms-2"><i class="fas fa-tags me-2"></i>Tags:
+                        
+                        <?php foreach ($post->tags() as $tag) : ?>
+                            <a href="<?= linkTo("tag/show/{$tag['id']}"); ?>"><?= $tag['name']; ?></a>
+                        <?php endforeach; ?>
+                    </div>
                     <?php if ($di->get("session")->get("user") == $post->user) : ?>
                         <div class="ms-3"><a href="<?= linkTo("post/update/{$post->id}"); ?>"><i class="fas fa-edit me-2"></i>Edit</a></div>
                         <div class="ms-3"><a href="<?= linkTo("post/delete/{$post->id}"); ?>"><i class="fas fa-trash me-2"></i>Remove</a></div>
