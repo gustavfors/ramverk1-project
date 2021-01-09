@@ -5,6 +5,7 @@ namespace Gufo\User;
 use Gufo\Commons\ValidationTrait;
 use Gufo\DatabaseObject\DatabaseObject;
 use Gufo\Post\Post;
+use Gufo\Vote\Vote;
 
 class User extends DatabaseObject
 {
@@ -97,6 +98,19 @@ class User extends DatabaseObject
         $sql .= "WHERE posts.parent IS NOT NULL AND posts.user = ?";
 
         return Post::findCustom($sql, [$this->id]);
+    }
+
+    public function hasVoted($post)
+    {
+        $sql = "SELECT * FROM votes WHERE post = ? AND user = ?";
+
+        $result = Vote::findCustom($sql, [$post, $this->id]);
+
+        if ($result) {
+            return $result[0];
+        } else {
+            return false;
+        }
     }
 
     public function fullName()

@@ -33,7 +33,7 @@ class PostController implements ContainerInjectableInterface
     public function createActionGet()
     {
         if (!$this->loggedIn()) {
-            return "Unauthorized";
+            return $this->redirect("user/login");
         }
 
         return $this->renderPage("post/create", "create");
@@ -42,7 +42,7 @@ class PostController implements ContainerInjectableInterface
     public function createActionPost()
     {
         if (!$this->loggedIn()) {
-            return "Unauthorized";
+            return $this->redirect("user/login");
         }
 
         $user = $this->getUser();

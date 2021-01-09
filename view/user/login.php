@@ -1,11 +1,23 @@
-<form action="<?= linkTo("user/login"); ?>" method="POST">
+<div class="card">
 
-    <label for="email">Email</label>
-    <input type="email" name="email">
+    <div class="card-header">
+        Login
+    </div>
 
-    <label for="password">password</label>
-    <input type="password" name="password">
+    <div class="card-body">
+        <form action="<?= linkTo("user/login"); ?>" method="POST">
 
-    <button type="submit">login</button>
+            <label for="email">Email</label>
+            <input type="email" name="email" class="form-control">
 
-</form>
+            <label for="password">password</label>
+            <input type="password" name="password" class="form-control">
+
+            <button type="submit" class="btn btn-primary mt-3">login</button>
+
+        </form>
+    </div>
+
+</div>
+
+

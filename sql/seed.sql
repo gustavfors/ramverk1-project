@@ -29,7 +29,8 @@ CREATE TABLE votes (
 DROP TABLE IF EXISTS tags;
 CREATE TABLE tags (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "name" Text UNIQUE
+    "name" Text UNIQUE,
+    "created" DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 --
@@ -63,32 +64,30 @@ INSERT INTO "users" ("firstname", "lastname", "email", "password") VALUES ("Cers
 
 
 -- /* Threads */
-INSERT INTO posts ("title", "body", "user", "created") VALUES (
+INSERT INTO posts ("title", "body", "user") VALUES (
     "We look up at the same stars and see such different things.",
     "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
-    1, 
-    "2020-01-15 10:13:48"
+    1
+    
 );
 
-INSERT INTO posts ("title", "body", "user", "created") VALUES (
+INSERT INTO posts ("title", "body", "user") VALUES (
     "When my dragons are grown, we will take back what was stolen from me and destroy those who wronged me.",
     "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.",
-    2, 
-    "2020-02-27 10:13:48"
+    2
+    
 );
 
-INSERT INTO posts ("title", "body", "user", "created") VALUES (
+INSERT INTO posts ("title", "body", "user") VALUES (
     "I have to disagree. Death is so final, yet life is full of possibilities.",
     "Pityful a rethoric question ran over her cheek, then she continued her way. On her way she met a copy.",
-    3, 
-    "2020-04-45 10:13:48"
+    3
 );
 
-INSERT INTO posts ("title", "body", "user", "created") VALUES (
+INSERT INTO posts ("title", "body", "user") VALUES (
     "The gods have no mercy, that’s why they’re gods",
     "Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.",
-    4, 
-    "2020-09-29 10:13:48"
+    4
 );
 
 
@@ -98,10 +97,10 @@ INSERT INTO posts ("title", "body", "user", "created") VALUES (
 -- INSERT INTO posts ("title", "body", "user", "parent", "created") VALUES ("Third post", "This is my third post", 1, 1, "2020-02-03 10:13:48");
 -- INSERT INTO posts ("title", "body", "user", "parent", "created") VALUES ("Fourth post", "This is my Fouth Post", 1, 1, "2020-03-03 10:13:48");
 
-
--- INSERT INTO votes ("score", "post", "user") VALUES (10, 2, 1);
--- INSERT INTO votes ("score", "post", "user") VALUES (24, 3, 1);
--- INSERT INTO votes ("score", "post", "user") VALUES (95, 4, 1);
+INSERT INTO votes ("score", "post", "user") VALUES (1, 1, 1);
+INSERT INTO votes ("score", "post", "user") VALUES (1, 2, 2);
+INSERT INTO votes ("score", "post", "user") VALUES (1, 3, 3);
+INSERT INTO votes ("score", "post", "user") VALUES (1, 4, 4);
 
 -- INSERT INTO votes ("score", "post", "user") VALUES (1, 1, 1);
 -- INSERT INTO votes ("score", "post", "user") VALUES (1, 1, 1);

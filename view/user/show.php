@@ -1,5 +1,11 @@
 <?php
-    $filter = $_GET['filter'] ?? "posts";
+use Gufo\User\User;
+
+if ($di->get("session")->has("user")) {
+    $user = User::findById($di->get("session")->get("user"));
+}
+
+$filter = $_GET['filter'] ?? "posts";
 ?>
 
 <div class="card mb-4">
@@ -17,17 +23,21 @@
     </div>
 </div>
 
-<?php
-
-
-if ($filter == "replies") {
-    foreach ($replies as $reply) {
-        require component("reply-single");
-    }
-} else {
-    foreach ($posts as $post) {
-        require component("post");
-    }
-}
+<?php if ($filter == "replies") : ?>
+    <?php foreach ($replies as $reply) : ?>
+        <div class="card mb-4">
+            <div class="card-header">
+                Reply
+            </div>
+            <div class="card-body">
+                <?php require component("reply"); ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php else : ?>
+    <?php foreach ($posts as $post) : ?>
+        <?php require component("post"); ?>
+    <?php endforeach; ?>
+<?php endif; ?>
 
 

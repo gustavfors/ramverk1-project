@@ -22,11 +22,6 @@ function component($name) {
     return ANAX_INSTALL_PATH . "/view/component/{$name}.php";
 }
 
-function dd($dump)
-{
-    die(var_dump($dump));
-}
-
 function linkTo($route)
 {
     global $di;

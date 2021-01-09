@@ -1,14 +1,20 @@
+
+
+
 <div class="bottom-panel d-flex align-items-center">
     <div><i class="fas fa-comment-alt me-1"></i><?= $post->repliesCount(); ?> Replies</div>
-    <div><i class="fas fa-tags me-1 ms-2"></i>Tags: 
-    <?php foreach($post->tags() as $tag) : ?>
-        <a href="#" class="ms-1"><?= htmlspecialchars($tag['name']); ?></a>
-    <?php endforeach; ?>
+    <?php require component("post-vote"); ?>
+    <?php if (preg_match("/post/", $di->get("request")->getRoute())) : ?>
+        <div><i class="fas fa-tags me-1 ms-2"></i>Tags: 
+        <?php foreach ($post->tags() as $tag) : ?>
+            <a href="#" class="ms-1"><?= htmlspecialchars($tag['name']); ?></a>
+        <?php endforeach; ?>
     </div>
+    <?php endif; ?>
 </div>
 
 <?php if (preg_match("/post\/show\/[0-9]+/", $di->get("request")->getRoute())) : ?>
-<form action="" method="POST" class="mt-4">
+<form action="<?= linkTo("reply/create/{$post->id}"); ?>" method="POST" class="mt-4">
     <textarea name="body" class="form-control border rounded-0 rounded-top" placeholder="What are your thoughts?" required rows="4"></textarea>
     <div
         class="bg-light border-bottom border-start border-end rounded-bottom p-2  d-flex justify-content-between align-items-center">

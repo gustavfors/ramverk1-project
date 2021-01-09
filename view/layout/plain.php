@@ -2,6 +2,13 @@
 
 namespace Anax\View;
 
+use Gufo\User\User;
+use Gufo\Tag\Tag;
+
+if ($di->get("session")->has("user")) {
+    $user = User::findById($di->get("session")->get("user"));
+}
+
 /**
  * A very small layout only rendering the content in a main
  * element.
@@ -35,7 +42,6 @@ $title = ($title ?? "No title");
 </head>
 
 <body>
-<?php var_dump($this->di->get("session")->get("user")); ?>
 <nav class="navbar navbar-expand-lg navbar-light bg-light border">
     <div class="container">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -43,9 +49,17 @@ $title = ($title ?? "No title");
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="#">Login</a>
-                <a class="nav-link" href="#">Register</a>
+            <div class="navbar-nav ms-auto d-flex align-items-center">
+                <a class="nav-link" href="<?= linkTo(""); ?>">Home</a>
+                <a class="nav-link" href="<?= linkTo("about"); ?>">About</a>
+                <a class="nav-link" href="<?= linkTo("tag"); ?>">Tags</a>
+                <?php if (!isset($user)) : ?>
+                    <a class="nav-link" href="<?= linkTo("user/login"); ?>">Login</a>
+                    <a class="nav-link" href="<?= linkTo("user/create"); ?>">Register</a>
+                <?php else : ?>
+                    <a class="nav-link" href="<?= linkTo("user/show/{$user->id}"); ?>">Profile</a>
+                    <a class="nav-link" href="<?= linkTo("user/logout"); ?>">Logout</a>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -58,7 +72,69 @@ $title = ($title ?? "No title");
             <?php renderRegion("main") ?>
         </div>
         <div class="col-4">
-            
+
+            <?php if (preg_match("/user\/show\/[0-9]+/", $di->get("request")->getRoute())) : ?>
+                    <div class="card">
+                        <div class="card-header">
+                            <p class="mb-0">Profile Overview</p> 
+                        </div>
+                        <div class="card-body">
+                            <?php $profile = User::findById($di->get("request")->getRouteParts()[2]); ?>
+                            <div class="d-flex align-items-start">
+                                <div>
+                                    <img src="<?= $profile->getGravatar(); ?>" alt="#" class="rounded-circle me-3" width="50">
+                                </div>
+                                <div class="d-flex flex-column">
+                                    
+                                    <?php $stats = $profile->stats(); ?>
+                                    
+                                    <div><a href="#"><?= htmlspecialchars($profile->firstname); ?> <?= htmlspecialchars($profile->lastname); ?></a></div>
+                                    <p class="mb-0">Score: <?= $stats['score']; ?></p>
+                                    <p class="mb-0">Posts: <?= $stats['posts']; ?></p>
+                                    <p class="mb-1">Replies: <?= $stats['replies']; ?></p>
+                                    <?php if (isset($user)) : ?>
+                                        <?php if ($user->id == $profile->id) : ?>
+                                            <a href="<?= $di->get("request")->getBaseUrl() . "/user/update/" . htmlspecialchars($profile->id); ?>"><i class="fas fa-plus-square me-1"></i>Edit</a>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+            <?php else : ?>
+                <a href="<?= linkTo("post/create"); ?>" class="btn btn-primary w-100">Create New Thread</a>
+            <?php endif; ?>
+
+            <div class="card mb-4 mt-4">
+                <div class="card-header">
+                    <p class="mb-0">User Highscore</p>
+                </div>
+                <div class="card-body">
+                    <?php foreach (User::highscore() as $user) : ?>
+                        <div class="mb-4 d-flex align-items-center">
+                            <div>
+                                <img src="<?= htmlspecialchars($user->getGravatar()); ?>" alt="#" class="rounded-circle me-3" width="50">
+                            </div>
+                            <div class="d-flex flex-column">
+                                <a href="<?= linkTo("user/show/{$user->id}"); ?>"><?= $user->fullName(); ?></a>
+                                Score: <?= $user->score; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <p class="mb-0">Popular Tags</p>
+                </div>
+                <div class="card-body">
+                    <?php foreach (Tag::popular() as $tag) : ?>
+                        <a href="<?= $di->get("request")->getBaseUrl() . "/tag/show/" . $tag['id']; ?>" style="font-size: 14px;"><?= $tag['name']; ?></a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+
         </div>
     </div>
 </main>

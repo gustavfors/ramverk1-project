@@ -14,10 +14,8 @@ class TagController implements ContainerInjectableInterface
 
     public function indexActionGet()
     {
-        die("here");
-
-        return $this->renderPage("post/index", "index", [
-            "posts" => Post::findAll()
+        return $this->renderPage("tag/index", "index", [
+            "tags" => Tag::findAll()
         ]);
     }
 

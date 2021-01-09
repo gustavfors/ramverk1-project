@@ -1,5 +1,6 @@
 body {
     color: #333;
+    font-size: 14px;
 }
 
 .thread-line {
@@ -60,6 +61,14 @@ h1 {
     margin-bottom: 0.25rem;
 }
 
+.continue-thread {
+    font-size: 12px;
+}
+
 form * {
     font-size: 12px !important;
+}
+
+.edit {
+    font-size: 10px;
 }

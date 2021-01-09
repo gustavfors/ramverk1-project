@@ -84,7 +84,7 @@ class UserController implements ContainerInjectableInterface
 
         $user->save();
 
-        die(var_dump($user));
+        return $this->redirect("user/show/{$user->id}");
     }
 
     public function loginActionGet()
@@ -106,8 +106,10 @@ class UserController implements ContainerInjectableInterface
         return $this->redirectBack();
     }
 
-    public function logoutActionGet()
+    public function logoutAction()
     {
         $this->di->get("session")->delete("user");
+
+        return $this->redirect("");
     }
 }

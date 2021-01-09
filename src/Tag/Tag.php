@@ -9,7 +9,7 @@ use Gufo\Post\Post;
 class Tag extends DatabaseObject
 {
     protected static $tableName = "tags";
-    protected static $dbColumns = ["id", "name"];
+    protected static $dbColumns = ["id", "name", "created"];
 
     public $id;
     public $name;
