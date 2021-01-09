@@ -8,7 +8,9 @@
         "psr-4": {"Anax\\": "src/", "Gufo\\": "src/"}
     },
     "require": {
-        "anax/anax-ramverk1-me": "^1.0.0"
+        "anax/anax-ramverk1-me": "^1.0.0",
+        "michelf/php-markdown": "^1.9",
+        "nesbot/carbon": "^2.43"
     },
     "require-dev": {
         "phpunit/phpunit": "^7"

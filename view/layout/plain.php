@@ -36,7 +36,7 @@ $title = ($title ?? "No title");
 
 <body>
 <?php var_dump($this->di->get("session")->get("user")); ?>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light border">
     <div class="container">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,11 +58,7 @@ $title = ($title ?? "No title");
             <?php renderRegion("main") ?>
         </div>
         <div class="col-4">
-            <?php if (preg_match("/user\/show\/[0-9]+/", $di->get("request")->getRoute())) : ?>
-            <?php require component("profile"); ?>
-            <?php endif; ?>
-            <?php require component("highscore"); ?>
-            <?php require component("tags"); ?>
+            
         </div>
     </div>
 </main>
@@ -83,6 +79,14 @@ $title = ($title ?? "No title");
 <?php if (regionHasContent("body-end")) : ?>
     <?php renderRegion("body-end") ?>
 <?php endif; ?>
+
+<script>
+
+    function replyForm(id) {
+        document.getElementById(id).classList.remove("d-none");
+    }
+
+</script>
 
 </body>
 </html>

@@ -15,7 +15,7 @@ class User extends DatabaseObject
     public $firstname;
     public $lastname;
     public $email;
-    protected $password;
+    public $password;
     public $score;
 
     public function __construct($values = [])
@@ -23,8 +23,13 @@ class User extends DatabaseObject
         $this->firstname = $values['firstname'] ?? '';
         $this->lastname = $values['lastname'] ?? '';
         $this->email = $values['email'] ?? '';
-        $this->password = $values['password'] ?? '';
+        // $this->password = $values['password'] ?? '';
         $this->score = $values['score'] ?? 0;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     public static function findByEmail($email)
@@ -72,7 +77,17 @@ class User extends DatabaseObject
         $stmt = static::$database->prepare($sql);
         $stmt->execute([$this->id]);
 
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$result) {
+            return [
+                'score' => 0,
+                'posts' => 0,
+                'replies' => 0
+            ];
+        } else {
+            return $result;
+        }
     }
 
     public function replies()
@@ -89,7 +104,8 @@ class User extends DatabaseObject
         return $this->firstname . " " . $this->lastname;
     }
 
-    public function get_gravatar() {
+    public function getGravatar()
+    {
         return "https://www.gravatar.com/avatar/" . md5(strtolower(trim($this->email)));
     }
 }

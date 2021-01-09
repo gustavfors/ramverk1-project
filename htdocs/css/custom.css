@@ -1,5 +1,5 @@
-.post-info {
-
+body {
+    color: #333;
 }
 
 .thread-line {
@@ -17,4 +17,49 @@
 
 img {
     border: 2px solid #dfdfdf;
+}
+
+.post-panel {
+    font-size: 14px;
+}
+
+button {
+    background: none;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1000px;
+}
+
+.top-panel {
+    font-size: 12px;
+    font-weight: 400;
+    color: #333;
+    
+}
+
+.middle-panel {
+    font-size: 14px;
+    color: #333;
+    margin: 0.5rem 0;
+}
+
+.bottom-panel {
+    font-size: 12px;
+    color: #666;
+}
+
+h1 {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 0.25rem;
+}
+
+form * {
+    font-size: 12px !important;
 }
