@@ -16,4 +16,14 @@ class SQLite
         }
         return $pdo;
     }
+
+    public static function connectMemory()
+    {
+        try {
+            $pdo = new \PDO('sqlite::memory:');
+        } catch (\PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+        return $pdo;
+    }
 }

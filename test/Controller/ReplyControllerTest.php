@@ -10,7 +10,7 @@ use Anax\DI\DIMagic;
 /**
  * Test the SampleController.
  */
-class PostControllerTest extends TestCase
+class ReplyControllerTest extends TestCase
 {
     // Create the di container.
     protected $di;
@@ -44,15 +44,8 @@ class PostControllerTest extends TestCase
         $testDatabase->query('INSERT INTO "posts" ("title", "body", "user") VALUES ("test", "test", 1)');
         $testDatabase->query('INSERT INTO "votes" ("score", "post", "user") VALUES (1, 1, 1)');
 
-        $this->controller = new \Gufo\Post\PostController();
+        $this->controller = new \Gufo\Reply\ReplyController();
         $this->controller->setDI($this->di);
-    }
-
-    public function testIndexAction()
-    {
-        $res = $this->controller->indexActionGet();
-
-        $this->assertInstanceOf(ResponseUtility::class, $res);
     }
 
     public function testShowActionGet()
@@ -73,16 +66,9 @@ class PostControllerTest extends TestCase
         $this->di->get("session")->delete("user");
     }
 
-    public function testCreateActionGet()
-    {
-        $res = $this->controller->createActionGet();
-
-        $this->assertInstanceOf(ResponseUtility::class, $res);
-    }
-
     public function testCreateActionPostNotLoggedIn()
     {
-        $res = $this->controller->createActionPost();
+        $res = $this->controller->createActionPost(1);
 
         $this->assertInstanceOf(ResponseUtility::class, $res);
     }
@@ -91,17 +77,9 @@ class PostControllerTest extends TestCase
     {
         $this->di->get("session")->set("user", 1);
 
-        $post = [
-            "title" => "test",
-            "body" => "test",
-        ];
+        $this->di->get("request")->setPost("body", "test");
 
-        $tags = "#test";
-
-        $this->di->get("request")->setPost("post", $post);
-        $this->di->get("request")->setPost("tags", $tags);
-
-        $res = $this->controller->createActionPost();
+        $res = $this->controller->createActionPost(1);
 
         $this->assertInstanceOf(ResponseUtility::class, $res);
 
@@ -126,15 +104,7 @@ class PostControllerTest extends TestCase
     {
         $this->di->get("session")->set("user", 1);
 
-        $post = [
-            "title" => "test",
-            "body" => "test",
-        ];
-
-        $tags = "#test";
-
-        $this->di->get("request")->setPost("post", $post);
-        $this->di->get("request")->setPost("tags", $tags);
+        $this->di->get("request")->setPost("body", "test");
 
         $res = $this->controller->updateActionGet(1);
 

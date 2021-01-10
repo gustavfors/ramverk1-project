@@ -29,8 +29,7 @@ CREATE TABLE votes (
 DROP TABLE IF EXISTS tags;
 CREATE TABLE tags (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "name" Text UNIQUE,
-    "created" DATETIME DEFAULT CURRENT_TIMESTAMP
+    "name" Text UNIQUE
 );
 
 --
@@ -100,7 +99,7 @@ INSERT INTO posts ("title", "body", "user") VALUES (
 INSERT INTO votes ("score", "post", "user") VALUES (1, 1, 1);
 INSERT INTO votes ("score", "post", "user") VALUES (1, 2, 2);
 INSERT INTO votes ("score", "post", "user") VALUES (1, 3, 3);
-INSERT INTO votes ("score", "post", "user") VALUES (1, 4, 4);
+INSERT INTO votes ("score", "post", "user") VALUES (1, 4, 1);
 
 -- INSERT INTO votes ("score", "post", "user") VALUES (1, 1, 1);
 -- INSERT INTO votes ("score", "post", "user") VALUES (1, 1, 1);
