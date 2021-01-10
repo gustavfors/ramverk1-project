@@ -6,7 +6,7 @@ if ($di->get("session")->has("user")) {
     $user = User::findById($di->get("session")->get("user"));
 }
 
-require component("post");
+require ANAX_INSTALL_PATH . "/view/component/post.php";
 
 $sort = $_GET['sort'] ?? 'popular';
 
@@ -32,7 +32,7 @@ $sort = $_GET['sort'] ?? 'popular';
         <?php if ($post->replies()) : ?>
             <?php foreach ($post->replies($sort) as $reply) : ?>
                 <?php $count = 0; ?>
-                <?php require component("reply"); ?>
+                <?php require ANAX_INSTALL_PATH . "/view/component/reply.php"; ?>
             <?php endforeach; ?>
         <?php else : ?>
         There are no replies yet...

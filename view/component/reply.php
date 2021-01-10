@@ -6,8 +6,8 @@
         <div class="thread-line"></div>
     </aside>
     <main class="ms-3" style="flex: 1;">
-        <?php require component("reply-top-panel"); ?>
-        <?php require component("reply-middle-panel"); ?>
-        <?php require component("reply-bottom-panel"); ?>
+        <?php require ANAX_INSTALL_PATH . "/view/component/reply-top-panel.php"; ?>
+        <?php require ANAX_INSTALL_PATH . "/view/component/reply-middle-panel.php"; ?>
+        <?php require ANAX_INSTALL_PATH . "/view/component/reply-bottom-panel.php"; ?>
     </main>
 </div>

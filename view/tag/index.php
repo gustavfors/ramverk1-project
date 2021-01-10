@@ -7,7 +7,8 @@
         No tags yet...
         <?php else : ?>
             <?php foreach ($tags as $tag) : ?>
-                <a href="<?= linkTo("tag/show/{$tag->id}"); ?>"><?= $tag->name; ?></a>
+                <a href="<?= $di->get("request")->getBaseUrl() . "/tag/show/" . $tag->id; ?>"><?= $tag->name; ?></a>
+                
             <?php endforeach; ?>
         <?php endif; ?>
     </div>

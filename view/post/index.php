@@ -8,5 +8,6 @@ if ($di->get("session")->has("user")) {
 
 foreach ($posts as $post) {
     // $author = $post->author();
-    require component("post");
+    // require component("post");
+    require ANAX_INSTALL_PATH . "/view/component/post.php";
 }

@@ -18,7 +18,7 @@ $sort = $_GET['sort'] ?? 'popular';
         <?php if ($reply->replies()) : ?>    
             <?php $count = 0; ?>
             <?php foreach ($reply->replies($sort) as $reply) : ?>
-                <?php require component("reply"); ?>
+                <?php require ANAX_INSTALL_PATH . "/view/component/reply.php"; ?>
             <?php endforeach; ?>
         <?php else : ?>
         There are no replies yet...

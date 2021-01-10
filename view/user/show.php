@@ -30,13 +30,13 @@ $filter = $_GET['filter'] ?? "posts";
                 Reply
             </div>
             <div class="card-body">
-                <?php require component("reply"); ?>
+                <?php require ANAX_INSTALL_PATH . "/view/component/reply.php"; ?>
             </div>
         </div>
     <?php endforeach; ?>
 <?php else : ?>
     <?php foreach ($posts as $post) : ?>
-        <?php require component("post"); ?>
+        <?php require ANAX_INSTALL_PATH . "/view/component/post.php"; ?>
     <?php endforeach; ?>
 <?php endif; ?>
 

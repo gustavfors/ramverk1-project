@@ -50,15 +50,15 @@ $title = ($title ?? "No title");
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto d-flex align-items-center">
-                <a class="nav-link" href="<?= linkTo(""); ?>">Home</a>
-                <a class="nav-link" href="<?= linkTo("about"); ?>">About</a>
-                <a class="nav-link" href="<?= linkTo("tag"); ?>">Tags</a>
+                <a class="nav-link" href="<?= $di->get("request")->getBaseUrl(); ?>">Home</a>
+                <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/about"; ?>">About</a>
+                <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/tag"; ?>">Tags</a>
                 <?php if (!isset($user)) : ?>
-                    <a class="nav-link" href="<?= linkTo("user/login"); ?>">Login</a>
-                    <a class="nav-link" href="<?= linkTo("user/create"); ?>">Register</a>
+                    <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/user/login"; ?>">Login</a>
+                    <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/user/create"; ?>">Register</a>
                 <?php else : ?>
-                    <a class="nav-link" href="<?= linkTo("user/show/{$user->id}"); ?>">Profile</a>
-                    <a class="nav-link" href="<?= linkTo("user/logout"); ?>">Logout</a>
+                    <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/user/show/" . $user->id; ?>">Profile</a>
+                    <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/user/logout"; ?>">Logout</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -102,7 +102,8 @@ $title = ($title ?? "No title");
                         </div>
                     </div>
             <?php else : ?>
-                <a href="<?= linkTo("post/create"); ?>" class="btn btn-primary w-100">Create New Thread</a>
+                <a href="<?= $di->get("request")->getBaseUrl() . "/post/create"; ?>" class="btn btn-primary w-100">Create New Thread</a>
+                
             <?php endif; ?>
 
             <div class="card mb-4 mt-4">
@@ -116,7 +117,8 @@ $title = ($title ?? "No title");
                                 <img src="<?= htmlspecialchars($user->getGravatar()); ?>" alt="#" class="rounded-circle me-3" width="50">
                             </div>
                             <div class="d-flex flex-column">
-                                <a href="<?= linkTo("user/show/{$user->id}"); ?>"><?= $user->fullName(); ?></a>
+                                <a href="<?= $di->get("request")->getBaseUrl() . "/user/show/" . $user->id; ?>"><?= $user->fullName(); ?></a>
+                                
                                 Score: <?= $user->score; ?>
                             </div>
                         </div>
@@ -130,7 +132,7 @@ $title = ($title ?? "No title");
                 </div>
                 <div class="card-body">
                     <?php foreach (Tag::popular() as $tag) : ?>
-                        <a href="<?= $di->get("request")->getBaseUrl() . "/tag/show/" . $tag['id']; ?>" style="font-size: 14px;"><?= $tag['name']; ?></a>
+                        <a href="<?= $di->get("request")->getBaseUrl() . "/tag/show/" . $tag['id']; ?>"><?= $tag['name']; ?></a>
                     <?php endforeach; ?>
                 </div>
             </div>

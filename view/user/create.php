@@ -3,7 +3,7 @@
         Register
     </div>
     <div class="card-body">
-        <form action="<?= linkTo("user/create"); ?>" method="POST">
+        <form action="<?= $di->get("request")->getBaseUrl() . "/user/create"; ?>" method="POST">
             <label for="firstname">First name</label>
             <input type="text" name="user[firstname]" class="form-control">
 

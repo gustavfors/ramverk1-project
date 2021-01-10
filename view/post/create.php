@@ -5,7 +5,7 @@
     </div>
 
     <div class="card-body">
-        <form action="<?= linkTo("post/create"); ?>" method="POST">
+        <form action="<?= $di->get("request")->getBaseUrl() . "/post/create"; ?>" method="POST">
             <label for="title">Title:</label>
             <input type="text" name="post[title]" id="title" class="form-control">
             <label for="tags">Tags: (example: #php #anax #dbwebb)</label>
