@@ -4,6 +4,7 @@ namespace Gufo\Reply;
 
 use Gufo\Commons\ValidationTrait;
 use Gufo\DatabaseObject\DatabaseObject;
+use Gufo\Post\Post;
 
 class Reply extends DatabaseObject
 {
@@ -15,6 +16,7 @@ class Reply extends DatabaseObject
     public $id;
     public $body;
     public $user;
+    public $parent;
     public $created;
 
     public function __construct($values = [])
@@ -28,6 +30,17 @@ class Reply extends DatabaseObject
     {
         $sql = "SELECT * FROM posts WHERE parent IS NOT NULL AND parent = ?";
         return self::findCustom($sql, [$this->id]);
+    }
+
+    public function post()
+    {
+        $parent = Reply::findById($this->parent);
+
+        while($parent->parent) {
+            $parent = Reply::findById($parent->parent);
+        }
+
+        return Post::findById($parent->id);
     }
 
     protected function validate()

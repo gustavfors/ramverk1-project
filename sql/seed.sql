@@ -1,6 +1,3 @@
---
--- Table Post
---
 DROP TABLE IF EXISTS posts;
 CREATE TABLE posts (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -8,13 +5,10 @@ CREATE TABLE posts (
     "body" TEXT,
     "parent" INTEGER,
     "user" INTEGER,
-    -- "best" INTEGER,
+    "best" INTEGER,
     "created" DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
---
--- Table Votes
---
 DROP TABLE IF EXISTS votes;
 CREATE TABLE votes (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -23,18 +17,13 @@ CREATE TABLE votes (
     "user" INTEGER
 );
 
---
--- Table Tags
---
 DROP TABLE IF EXISTS tags;
 CREATE TABLE tags (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "name" Text UNIQUE
+    "name" Text UNIQUE,
+    "created" DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
---
--- Table Post_Tag
---
 DROP TABLE IF EXISTS post_tag;
 CREATE TABLE post_tag (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -42,9 +31,6 @@ CREATE TABLE post_tag (
     "post" INTEGER
 );
 
---
--- Table Users
---
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -53,6 +39,7 @@ CREATE TABLE users (
     "email" TEXT,
     "password" TEXT
 );
+
 
 INSERT INTO "users" ("firstname", "lastname", "email", "password") VALUES ("Jon", "Snow", "riforon770@nonicamy.com", "pass123");
 INSERT INTO "users" ("firstname", "lastname", "email", "password") VALUES ("Daenerys", "Targaryen", "magegi4179@cocyo.com", "pass123");
@@ -67,14 +54,12 @@ INSERT INTO posts ("title", "body", "user") VALUES (
     "We look up at the same stars and see such different things.",
     "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.",
     1
-    
 );
 
 INSERT INTO posts ("title", "body", "user") VALUES (
     "When my dragons are grown, we will take back what was stolen from me and destroy those who wronged me.",
     "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.",
     2
-    
 );
 
 INSERT INTO posts ("title", "body", "user") VALUES (

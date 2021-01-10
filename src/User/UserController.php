@@ -12,13 +12,6 @@ class UserController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait, UtilityTrait, AuthTrait;
 
-    public function indexActionGet()
-    {
-        $this->di->get("page")->add("user/index");
-
-        return $this->di->get("page")->render(["title" => "index"]);
-    }
-
     public function showActionGet($id)
     {
         $user = User::findById($id);
@@ -94,7 +87,6 @@ class UserController implements ContainerInjectableInterface
 
     public function loginActionPost()
     {
-
         $user = User::findByEmail($this->getPost("email"));
         
         if ($user) {

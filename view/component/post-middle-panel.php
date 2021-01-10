@@ -5,5 +5,5 @@
     <h1><a href="<?= $di->get("request")->getBaseUrl() . "/post/show/" . $post->id; ?>"><?= htmlspecialchars($post->title); ?></a></h1>
     
     <?php endif; ?>
-    <div><?= htmlspecialchars($post->body); ?></div>
+    <div><?= \Michelf\Markdown::defaultTransform(htmlspecialchars($post->body)); ?></div>
 </div>

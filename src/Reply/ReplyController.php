@@ -17,7 +17,7 @@ class ReplyController implements ContainerInjectableInterface
     public function showActionGet($id)
     {
         return $this->renderPage("reply/show", "show", [
-            "reply" => Post::findById($id)
+            "reply" => Reply::findById($id)
         ]);
     }
 

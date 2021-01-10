@@ -8,6 +8,8 @@ if ($di->get("session")->has("user")) {
 
 $sort = $_GET['sort'] ?? 'popular';
 
+
+
 ?>
 
 <div class="card">

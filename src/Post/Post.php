@@ -13,12 +13,13 @@ class Post extends DatabaseObject
 
     protected static $tableName = "posts";
 
-    protected static $dbColumns = ["id", "title", "body", "user", "created"];
+    protected static $dbColumns = ["id", "title", "body", "user", "best", "created"];
 
     public $id;
     public $title;
     public $body;
     public $user;
+    public $best;
     public $created;
 
     public function __construct($values = [])
@@ -50,7 +51,7 @@ class Post extends DatabaseObject
         
         $values = [$this->id];
 
-        return $this::findCustom($sql, $values);
+        return Reply::findCustom($sql, $values);
     }
 
     protected function validate()

@@ -101,4 +101,26 @@ class PostController implements ContainerInjectableInterface
 
         return $this->redirect("post/show/{$post->id}");
     }
+
+    public function bestActionGet($id)
+    {
+        $reply = Reply::findById($id);
+        
+        $post = $reply->post();
+        
+        if (!$this->owner($post->user)) {
+            return "Unauthorized.";
+        }
+
+        if ($post->best == $reply->id) {
+            $post->best = null;
+        } else {
+            $post->best = $reply->id;
+        }
+
+        $post->save();
+
+        return $this->redirectBack();
+        
+    }
 }

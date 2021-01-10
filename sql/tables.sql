@@ -5,6 +5,7 @@ CREATE TABLE posts (
     "body" TEXT,
     "parent" INTEGER,
     "user" INTEGER,
+    "best" INTEGER,
     "created" DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
