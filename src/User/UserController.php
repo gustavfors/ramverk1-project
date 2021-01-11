@@ -12,6 +12,13 @@ class UserController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait, UtilityTrait, AuthTrait;
 
+    public function indexActionGet()
+    {
+        return $this->renderPage("user/index", "index", [
+            "users" => User::highscore()
+        ]);
+    }
+
     public function showActionGet($id)
     {
         $user = User::findById($id);

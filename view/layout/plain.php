@@ -52,6 +52,7 @@ $title = ($title ?? "No title");
             <div class="navbar-nav ms-auto d-flex align-items-center">
                 <a class="nav-link" href="<?= $di->get("request")->getBaseUrl(); ?>">Home</a>
                 <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/about"; ?>">About</a>
+                <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/user"; ?>">Users</a>
                 <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/tag"; ?>">Tags</a>
                 <?php if (!isset($user)) : ?>
                     <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/user/login"; ?>">Login</a>
