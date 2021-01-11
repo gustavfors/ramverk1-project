@@ -36,7 +36,7 @@ class PostControllerTest extends TestCase
 
         $testDatabase = \Gufo\Sqlite\Sqlite::connectMemory();
 
-        $testDatabase->exec(file_get_contents(ANAX_INSTALL_PATH . "\\sql\\tables.sql"));
+        $testDatabase->exec(file_get_contents(ANAX_INSTALL_PATH . "/sql/tables.sql"));
         
         \Gufo\DatabaseObject\DatabaseObject::setDatabase($testDatabase);
         
