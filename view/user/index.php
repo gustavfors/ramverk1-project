@@ -11,7 +11,7 @@
                     <img src="<?= htmlspecialchars($user->getGravatar()); ?>" alt="#" class="rounded-circle me-3" width="50">
                 </div>
                 <div class="d-flex flex-column">
-                    <a href="<?= $di->get("request")->getBaseUrl() . "/user/show/" . $user->id; ?>"><?= $user->fullName(); ?></a>
+                    <a href="<?= $di->get("request")->getBaseUrl() . "/user/show/" . $user->id; ?>"><?= htmlspecialchars($user->fullName()); ?></a>
                     Score: <?= $user->score; ?>
                 </div>
             </div>

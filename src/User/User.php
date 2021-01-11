@@ -94,7 +94,7 @@ class User extends DatabaseObject
 
     public function replies()
     {
-        $sql = "SELECT posts.id, posts.title, posts.body, posts.user, posts.created FROM posts ";
+        $sql = "SELECT posts.id, posts.title, posts.body, posts.user, posts.created, posts.parent FROM posts ";
         $sql .= "INNER JOIN users ON users.id = posts.user ";
         $sql .= "WHERE posts.parent IS NOT NULL AND posts.user = ?";
 

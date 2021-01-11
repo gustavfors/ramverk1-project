@@ -1,6 +1,3 @@
-
-
-
 <div class="bottom-panel d-flex align-items-center">
     <div><i class="fas fa-comment-alt me-1"></i><?= $post->repliesCount(); ?> Replies</div>
     <?php require ANAX_INSTALL_PATH . "/view/component/post-vote.php"; ?>
