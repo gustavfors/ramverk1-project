@@ -7,9 +7,9 @@
     <div class="card-body">
         <form action="<?= $di->get("request")->getBaseUrl() . "/post/create"; ?>" method="POST">
             <label for="title">Title:</label>
-            <input type="text" name="post[title]" id="title" class="form-control">
+            <input type="text" name="post[title]" id="title" class="form-control mb-3">
             <label for="tags">Tags: (example: #php #anax #dbwebb)</label>
-            <input type="text" name="tags" id="tags" class="form-control">
+            <input type="text" name="tags" id="tags" class="form-control mb-3">
             <label for="body">Body:</label>
             <textarea name="post[body]" id="body" class="form-control" rows="8"></textarea>
             <button type="submit" class="btn btn-primary mt-3">Submit Thread</button>

@@ -36,7 +36,7 @@ class Reply extends DatabaseObject
     {
         $parent = Reply::findById($this->parent);
 
-        while($parent->parent) {
+        while ($parent->parent) {
             $parent = Reply::findById($parent->parent);
         }
 

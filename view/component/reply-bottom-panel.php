@@ -3,9 +3,16 @@
     <button><a href="<?= $di->get("request")->getBaseUrl() . "/reply/show/" . $reply->id; ?>"><i class="fas fa-plus-square me-1"></i>Expand</a></button>
     <?php require ANAX_INSTALL_PATH . "/view/component/reply-vote.php"; ?>
     <?php if ($reply->id == $reply->post()->best) : ?>
-        <a href="<?= $di->get("request")->getBaseUrl() . "/post/best/" . $reply->id; ?>" class="ms-1 text-success"><i class="fas fa-check me-1"></i>Best Reply</a>  
-    <?php else : ?>
-        <a href="<?= $di->get("request")->getBaseUrl() . "/post/best/" . $reply->id; ?>" class="ms-1">Mark Best</a>
+        <div class="ms-1 text-success"><i class="fas fa-check me-1"></i>Best Reply</div>
+    <?php endif; ?>
+
+    <?php if (isset($user)) : ?>
+        <?php if ($user->id == $reply->post()->user) : ?>
+            <?php if ($reply->id != $reply->post()->best) : ?>
+                <a href="<?= $di->get("request")->getBaseUrl() . "/post/best/" . $reply->id; ?>" class="ms-1">Mark Best</a>                
+            <?php endif; ?>
+            
+        <?php endif; ?>
     <?php endif; ?>
 </div>
 

@@ -112,15 +112,10 @@ class PostController implements ContainerInjectableInterface
             return "Unauthorized.";
         }
 
-        if ($post->best == $reply->id) {
-            $post->best = null;
-        } else {
-            $post->best = $reply->id;
-        }
-
+        $post->best = $reply->id;
+        
         $post->save();
 
         return $this->redirectBack();
-        
     }
 }

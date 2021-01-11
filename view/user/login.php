@@ -8,7 +8,7 @@
         <form action="<?= $di->get("request")->getBaseUrl() . "/user/login"; ?>" method="POST">
 
             <label for="email">Email</label>
-            <input type="email" name="email" class="form-control">
+            <input type="email" name="email" class="form-control mb-3">
 
             <label for="password">password</label>
             <input type="password" name="password" class="form-control">

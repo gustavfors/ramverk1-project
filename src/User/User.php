@@ -5,6 +5,7 @@ namespace Gufo\User;
 use Gufo\Commons\ValidationTrait;
 use Gufo\DatabaseObject\DatabaseObject;
 use Gufo\Post\Post;
+use Gufo\Reply\Reply;
 use Gufo\Vote\Vote;
 
 class User extends DatabaseObject
@@ -97,7 +98,7 @@ class User extends DatabaseObject
         $sql .= "INNER JOIN users ON users.id = posts.user ";
         $sql .= "WHERE posts.parent IS NOT NULL AND posts.user = ?";
 
-        return Post::findCustom($sql, [$this->id]);
+        return Reply::findCustom($sql, [$this->id]);
     }
 
     public function hasVoted($post)

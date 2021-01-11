@@ -97,9 +97,10 @@ class UserController implements ContainerInjectableInterface
         $user = User::findByEmail($this->getPost("email"));
         
         if ($user) {
-            password_verify($this->getPost("password"), $user->password);
-            $this->di->get("session")->set("user", $user->id);
-            return $this->redirect("");
+            if (password_verify($this->getPost("password"), $user->password)) {
+                $this->di->get("session")->set("user", $user->id);
+                return $this->redirect("");
+            }
         }
 
         return $this->redirectBack();

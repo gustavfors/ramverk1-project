@@ -4,7 +4,7 @@
 <div class="bottom-panel d-flex align-items-center">
     <div><i class="fas fa-comment-alt me-1"></i><?= $post->repliesCount(); ?> Replies</div>
     <?php require ANAX_INSTALL_PATH . "/view/component/post-vote.php"; ?>
-    <?php if (preg_match("/post/", $di->get("request")->getRoute())) : ?>
+    <?php if (preg_match("/post/", $di->get("request")->getRoute()) || $di->get("request")->getRoute() == "") : ?>
         <div><i class="fas fa-tags me-1 ms-2"></i>Tags: 
         <?php foreach ($post->tags() as $tag) : ?>
             <a href="#" class="ms-1"><?= htmlspecialchars($tag['name']); ?></a>

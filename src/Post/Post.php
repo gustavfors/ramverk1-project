@@ -62,9 +62,9 @@ class Post extends DatabaseObject
             $this->errors[] = "Title cannot be blank.";
         }
 
-        if ($this->isBlank($this->body)) {
-            $this->errors[] = "Body cannot be blank.";
-        }
+        // if ($this->isBlank($this->body)) {
+        //     $this->errors[] = "Body cannot be blank.";
+        // }
 
         return $this->errors;
     }

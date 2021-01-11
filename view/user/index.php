@@ -1,6 +1,6 @@
 <?php $rank = 1; ?>
 
-<?php foreach($users as $user) : ?>
+<?php foreach ($users as $user) : ?>
     <div class="card mb-4">
         <div class="card-header">
             User Rank: <?= $rank; ?>
