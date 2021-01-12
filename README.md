@@ -32,9 +32,9 @@ chmod 666 data/db.sqlite
 sqlite3 data/db.sqlite < sql/seed.sql
 ```
 
-5. install dependencies and run tests
+5. install dependencies
 ```
-make test
+make install
 ```
 
 6. Serve on a server example built in php dev
