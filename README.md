@@ -22,7 +22,7 @@ cd ramverk1-project
 ```
 
 3. create database
-``
+```
 touch data/db.sqlite
 chmod 666 data/db.sqlite
 ```
