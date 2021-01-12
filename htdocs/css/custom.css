@@ -16,6 +16,10 @@ body {
     margin-top: 1rem;
 }
 
+p, h1, h2, h3, h4, h5, h6, a, span {
+    overflow-wrap: anywhere;
+}
+
 img {
     border: 2px solid #dfdfdf;
 }
@@ -72,3 +76,4 @@ form * {
 .edit {
     font-size: 10px;
 }
+

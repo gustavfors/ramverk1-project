@@ -49,8 +49,8 @@ class User extends DatabaseObject
     public static function highscore()
     {
         $sql = "SELECT users.id, users.firstname, users.lastname, users.email, (((SELECT COUNT(*) FROM posts WHERE posts.user = users.id) * 10) + SUM(votes.score)) AS `score` FROM users";
-        $sql .= " INNER JOIN posts ON posts.user = users.id";
-        $sql .= " INNER JOIN votes ON posts.id = votes.post";
+        $sql .= " LEFT JOIN posts ON posts.user = users.id";
+        $sql .= " LEFT JOIN votes ON posts.id = votes.post";
         $sql .= " GROUP BY users.firstname";
         $sql .= " ORDER BY `score` DESC";
 
@@ -70,9 +70,9 @@ class User extends DatabaseObject
 
     public function stats()
     {
-        $sql = "SELECT users.firstname, users.lastname, (SELECT COUNT(posts.id) FROM posts WHERE user = users.id AND parent IS NULL) as `posts`, (SELECT count(posts.id) FROM posts WHERE user = users.id AND parent IS NOT NULL) AS `replies`, (((SELECT COUNT(*) FROM posts WHERE posts.user = users.id) * 10) + SUM(votes.score)) AS `score` FROM users ";
-        $sql .= "INNER JOIN posts ON posts.user = users.id ";
-        $sql .= "INNER JOIN votes ON posts.id = votes.post ";
+        $sql = "SELECT users.firstname, users.lastname, (SELECT COUNT(posts.id) FROM posts WHERE user = users.id AND parent IS NULL) as `posts`, (SELECT count(posts.id) FROM posts WHERE user = users.id AND parent IS NOT NULL) AS `replies`, (((SELECT COUNT(*) FROM posts WHERE posts.user = users.id) * 10) + SUM(votes.score)) AS `score`, (SELECT COUNT(*) FROM votes WHERE votes.user = users.id) AS `voted` FROM users ";
+        $sql .= "LEFT JOIN posts ON posts.user = users.id ";
+        $sql .= "LEFT JOIN votes ON posts.id = votes.post ";
         $sql .= "WHERE users.id = ? ";
         $sql .= "GROUP BY users.id ";
 

@@ -43,6 +43,20 @@ class Reply extends DatabaseObject
         return Post::findById($parent->id);
     }
 
+    public function level()
+    {
+        $level = 0;
+
+        $parent = Reply::findById($this->parent);
+
+        while ($parent->parent) {
+            $parent = Reply::findById($parent->parent);
+            $level++;
+        }
+
+        return $level;
+    }
+
     protected function validate()
     {
         $this->errors = [];

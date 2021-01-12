@@ -52,6 +52,7 @@ $title = ($title ?? "No title");
             <div class="navbar-nav ms-auto d-flex align-items-center">
                 <a class="nav-link" href="<?= $di->get("request")->getBaseUrl(); ?>">Home</a>
                 <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/about"; ?>">About</a>
+                <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/post"; ?>">Posts</a>
                 <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/user"; ?>">Users</a>
                 <a class="nav-link" href="<?= $di->get("request")->getBaseUrl() . "/tag"; ?>">Tags</a>
                 <?php if (!isset($user)) : ?>
@@ -90,9 +91,10 @@ $title = ($title ?? "No title");
                                     <?php $stats = $profile->stats(); ?>
                                     
                                     <div><a href="#"><?= htmlspecialchars($profile->firstname); ?> <?= htmlspecialchars($profile->lastname); ?></a></div>
-                                    <p class="mb-0">Score: <?= $stats['score']; ?></p>
-                                    <p class="mb-0">Posts: <?= $stats['posts']; ?></p>
-                                    <p class="mb-1">Replies: <?= $stats['replies']; ?></p>
+                                    <p class="mb-0">Score: <?= $stats['score'] ?? 0; ?></p>
+                                    <p class="mb-0">Posts: <?= $stats['posts'] ?? 0; ?></p>
+                                    <p class="mb-0">Replies: <?= $stats['replies'] ?? 0; ?></p>
+                                    <p class="mb-1">Voted: <?= $stats['voted'] ?? 0; ?></p>
                                     <?php if (isset($user)) : ?>
                                         <?php if ($user->id == $profile->id) : ?>
                                             <a href="<?= $di->get("request")->getBaseUrl() . "/user/update/" . htmlspecialchars($profile->id); ?>"><i class="fas fa-plus-square me-1"></i>Edit</a>
@@ -120,7 +122,7 @@ $title = ($title ?? "No title");
                             <div class="d-flex flex-column">
                                 <a href="<?= $di->get("request")->getBaseUrl() . "/user/show/" . $user->id; ?>"><?= htmlspecialchars($user->fullName()); ?></a>
                                 
-                                Score: <?= $user->score; ?>
+                                Score: <?= $user->score ?? 0; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -29,18 +29,15 @@
 
 <?php if (isset($count)) : ?>
 <div class="mt-3">
-
-    <?php if ($count < 4) : ?>
+    <?php if ($count > 3 && $reply->level() > 3) : ?>
+        <?php if ($reply->replies()) : ?>
+            <a class="continue-thread" href="<?= $di->get("request")->getBaseUrl() . "/reply/show/" . $reply->id; ?>">Continue Thread...</a>
+        <?php endif; ?>
+    <?php else : ?>
         <?php foreach ($reply->replies() as $reply) : ?>
             <?php $count++; ?>
             <?php require ANAX_INSTALL_PATH . "/view/component/reply.php"; ?>
         <?php endforeach; ?>
-    <?php else : ?>
-        <?php if ($reply->replies()) : ?>
-            <a class="continue-thread" href="<?= $di->get("request")->getBaseUrl() . "/reply/show/" . $reply->id; ?>">Continue Thread...</a>
-            
-        <?php endif; ?>
     <?php endif; ?>
-    
 </div>
 <?php endif; ?>
