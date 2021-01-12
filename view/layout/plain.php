@@ -105,7 +105,7 @@ $title = ($title ?? "No title");
                         </div>
                     </div>
             <?php else : ?>
-                <a href="<?= $di->get("request")->getBaseUrl() . "/post/create"; ?>" class="btn btn-primary w-100">Create New Thread</a>
+                <a href="<?= $di->get("request")->getBaseUrl() . "/post/create"; ?>" class="btn btn-primary w-100" style="font-size: 14px;">Create New Thread</a>
                 
             <?php endif; ?>
 
